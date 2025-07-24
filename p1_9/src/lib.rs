@@ -1,5 +1,5 @@
 mod p1;
-mod template_test;
+mod test_template;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
