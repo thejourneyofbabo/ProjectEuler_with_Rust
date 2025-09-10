@@ -27,6 +27,7 @@ fn find_answer(mut n: u64) -> u64 {
     n
 }
 
+#[allow(dead_code)]
 #[cfg(test)]
 fn find_answer1(mut n: u64) -> u64 {
     let mut p = 2;
@@ -44,17 +45,38 @@ fn find_answer1(mut n: u64) -> u64 {
 }
 
 #[cfg(test)]
+fn find_answer2(mut n: u64) -> u64 {
+    let mut p = 2;
+    let mut max_factor = (n as f64).sqrt() as u64; // 1) sqrt(n)
+
+    while n > 1 && p <= max_factor {
+        if 0 == n % p {
+            n /= p;
+            max_factor = (n as f64).sqrt() as u64;
+        } else {
+            p += 1;
+        }
+    }
+
+    if n != 1 {
+        p = n;
+    }
+
+    p
+}
+
+#[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test() {
         println!("test_template");
-        assert_eq!(5, find_answer1(10));
-        assert_eq!(2, find_answer1(16));
-        assert_eq!(17, find_answer1(17));
+        assert_eq!(5, find_answer2(10));
+        assert_eq!(2, find_answer2(16));
+        assert_eq!(17, find_answer2(17));
 
-        assert_eq!(29, find_answer1(13195));
-        println!("{}", find_answer1(600851475143));
+        assert_eq!(29, find_answer2(13195));
+        println!("{}", find_answer2(600851475143));
     }
 }
