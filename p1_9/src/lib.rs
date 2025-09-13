@@ -1,6 +1,7 @@
 mod p1;
 mod p2;
 mod p3;
+mod p4;
 mod test_template;
 
 pub fn add(left: u64, right: u64) -> u64 {
