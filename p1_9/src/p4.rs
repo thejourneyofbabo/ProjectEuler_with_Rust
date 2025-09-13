@@ -19,20 +19,23 @@ fn is_palindrome(num: u32) -> bool {
 
 #[cfg(test)]
 fn find_palindrome() -> u32 {
-    // 1. find from [100..=999]
-    let mut a: u32 = 100;
+    // 1. find from [999..=100]
+    let mut a: u32 = 999;
     let mut max: u32 = 1;
-    while a <= 999 {
-        let mut b: u32 = 100;
+    while a >= 100 {
+        let mut b: u32 = 999;
         let mut p: u32;
-        while b <= 999 {
+        while b >= a {
             p = a * b;
+            if p <= max {
+                break;
+            }
             if is_palindrome(p) && p > max {
                 max = p;
             }
-            b += 1;
+            b -= 1;
         }
-        a += 1;
+        a -= 1;
     }
     max
 }
