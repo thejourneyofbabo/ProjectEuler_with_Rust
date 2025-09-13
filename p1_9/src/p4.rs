@@ -69,6 +69,7 @@ fn rev_num(mut n: u32) -> u32 {
     rev
 }
 
+#[allow(dead_code)]
 #[cfg(test)]
 fn find_palindrome3() -> u32 {
     // 1. make plaindromic num
@@ -87,11 +88,29 @@ fn find_palindrome3() -> u32 {
 }
 
 #[cfg(test)]
+fn find_palindrome4(n: u32) -> u32 {
+    // 1. make plaindromic num
+    let mut x: u32 = 999;
+    let mut max: u32 = 1;
+    while x >= 100 {
+        let y = rev_num(x);
+        let p = x * 1000 + y;
+        if p < n && is_product(p) {
+            max = p;
+            break;
+        }
+        x -= 1;
+    }
+    max
+}
+
+#[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test() {
         println!("{}", find_palindrome3());
+        println!("{}", find_palindrome4(800000));
     }
 }
