@@ -21,6 +21,7 @@ fn lcm(a: u64, b: u64) -> u64 {
     a * b / gcd(a, b)
 }
 
+#[allow(dead_code)]
 #[cfg(test)]
 fn answer(n: u64) -> u64 {
     let mut ans: u64 = 1;
@@ -31,16 +32,28 @@ fn answer(n: u64) -> u64 {
 }
 
 #[cfg(test)]
+fn answer1(n: u64) -> u64 {
+    let mut ans: u64 = 1;
+    for i in 2..=n {
+        if ans % i > 0 {
+            ans = lcm(ans, i);
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test() {
-        assert_eq!(1, answer(1));
-        assert_eq!(2, answer(2));
-        assert_eq!(6, answer(3));
-        assert_eq!(2520, answer(10));
+        assert_eq!(1, answer1(1));
+        assert_eq!(2, answer1(2));
+        assert_eq!(6, answer1(3));
+        assert_eq!(2520, answer1(10));
 
-        println!("LCM 1 to 20 = {}", answer(20));
+        println!("LCM 1 to 20 = {}", answer1(20));
     }
 }
